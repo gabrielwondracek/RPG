@@ -18,7 +18,7 @@ if lowercase_classe == 'guerreiro':
     vidaMax = 250
     defesaFisica = 0.8
     defesaMagica = 0.8
-elif lowercase_classe == 'Mago':
+elif lowercase_classe == 'mago':
     vidaMax = 100
     defesaFisica = 0.95
     defesaMagica = 0.95

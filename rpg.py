@@ -16,15 +16,15 @@ while lowercase_classe != 'guerreiro' and lowercase_classe != 'mago' and lowerca
 #DEFINIR VALORES DE VIDA E MANA COM BASE NA CLASSE
 if lowercase_classe == 'guerreiro':
     vidaMax = 250
-    defesaFisica = 0.8
+    defesaFisica = 0.8 #20% de redução de dano
     defesaMagica = 0.8
 elif lowercase_classe == 'mago':
     vidaMax = 100
-    defesaFisica = 0.95
+    defesaFisica = 0.95 #5% de redução de dano
     defesaMagica = 0.95
 elif lowercase_classe == 'ladino':
     vidaMax = 150
-    defesaFisica = 0.9
+    defesaFisica = 0.9 #10% de redução de dano
     defesaMagica = 0.9
 
 #MOSTRAR A CLASSE E OS VALORES  
@@ -36,13 +36,13 @@ sleep(delay)#delay
 habilidadeClasse = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if lowercase_classe == 'guerreiro':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 rodadas), digite 2 para golpe desleal (50 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 rodadas), digite 2 para golpe desleal (30 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
 elif lowercase_classe == 'mago':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (40 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 30% menos de dano por 3 rodadas): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (20 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 30% menos de dano por 3 rodadas): ")
 elif lowercase_classe == 'ladino':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 turnos você terá 1/4 de chance de desviar do ataque) ou digite 3 para ataque surpresa (60 de dano real): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 turnos você terá 1/4 de chance de desviar do ataque) ou digite 3 para ataque surpresa (50 de dano real): ")
 
 sleep(delay)#delay    
 
@@ -133,7 +133,7 @@ print(f'Seu equipamento é {equipamento}')
 sleep(delay2)#delay
 
 #FALAR TODOS OS ATRIBUTOS------------------------------------------------------------------------------------------------------------------------------------------------
-print(f'Sua classe é {lowercase_classe} sua vida é {vidaMax} sua habilidade é {habilidadeClasse} e seu equipamento é {equipamento}')
+print(f'Sua classe é {lowercase_classe}, sua vida é {vidaMax}, sua habilidade é {habilidadeClasse}, e seu equipamento é {equipamento}')
 
 sleep(delay2)#delay
 
@@ -166,7 +166,7 @@ if inimigo == 3:
     danoMagicoInimigo = random.randint(25,30)
     defesaFisicaInimigo = 0.2
     defesaMagicaInimigo = 1.2
-    habilidadeInimigo = 'Bola elétrica' #causa 50 de dano e ignora a defesa mágica
+    habilidadeInimigo = 'Bola elétrica' #causa 50 de dano real
 #Guerreiro de pedra
 if inimigo == 4:
     inimigo = 'guerreiro de pedra'
@@ -176,7 +176,7 @@ if inimigo == 4:
     defesaFisicaInimigo = 0.8
     defesaMagicaInimigo = 0.8
     habilidadeInimigo = 'Petrificar' #pula um turno do usuário
-print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano físico de {danoFisicoInimigo} dano mágico de {danoMagicoInimigo} e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
+print(f'Seu inimigo é {inimigo}, com vida de {vidaInimigo}, dano físico de {danoFisicoInimigo}, dano mágico de {danoMagicoInimigo}, e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
 
 sleep(delay3)#delay
 
@@ -194,6 +194,8 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
 
     if contadorHabilidade >= 5:
+
+        #GUERREIRO
         while usoHabilidade != '1' and usoHabilidade != '2':
             usoHabilidade = input(f'Quer usar sua habilidade {habilidadeClasse} 1 para sim 2 para não: ')
         if lowercase_classe == 'guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria funcional
@@ -202,21 +204,25 @@ while vidaInimigo >= 0 and vidaMax >= 0:
                 danoExtraFisico = danoFisico * 1.5
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'guerreiro' and habilidadeClasse == 'golpe desleal' and usoHabilidade == "1": #golpe desleal funcional
-            vidaInimigo = vidaInimigo - 50
+            vidaInimigo = vidaInimigo - 30
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'guerreiro' and habilidadeClasse == 'revigorância' and usoHabilidade == "1": #revigorância funcional
             vidaMax = vidaMax + 40
             print(f'Você usou sua habilidade {habilidadeClasse}!')
+
+
         #MAGO
         elif lowercase_classe == 'mago' and habilidadeClasse == 'bola de fogo' and usoHabilidade == "1": #bola de fogo funcional
             vidaInimigo = vidaInimigo - (100 * defesaMagicaInimigo)
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'mago' and habilidadeClasse == 'raio' and usoHabilidade == "1": #raio funcional
-            vidaInimigo = vidaInimigo - 40
+            vidaInimigo = vidaInimigo - 20
             atordoamento = '1'
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'mago' and habilidadeClasse == 'véu mágico' and usoHabilidade == "1": #véu mágico
             print(f'Você usou sua habilidade {habilidadeClasse}!')
+
+
         #LADINO
         elif lowercase_classe == 'ladino' and habilidadeClasse == 'roubo' and usoHabilidade == "1": #roubo funcional
             vidaInimigo = vidaInimigo - 20
@@ -225,15 +231,19 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         elif lowercase_classe == 'ladino' and habilidadeClasse == 'astúcia' and usoHabilidade == "1": #astúcia
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'ladino' and habilidadeClasse == 'ataque surpresa': #ataque surpresa funcional
-            vidaInimigo = vidaInimigo - 60
+            vidaInimigo = vidaInimigo - 50
             print(f'Você usou sua habilidade {habilidadeClasse}!')
+
 
         if usoHabilidade == '1':
             contadorHabilidade = 0 #define o contadorHabilidade como 0
 
     if contadorFuria < 4:
         contadorFuria = contadorFuria + 1
-        print(f'você está enfurecido a {contadorFuria}')
+        if contadorFuria < 4:
+            print(f'Faltam {3 - contadorFuria} rodadas para acabar a habilidade fúria')
+        else:
+            print('Você não está mais enfurecido!')
 
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
@@ -297,7 +307,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     sleep(delay2)#delay
 
     #contador de turno
-    print(f'Fim do {turno} turno!')
+    print(f'Fim do {turno} turno! -------------------------------------------------------')
     turno = turno + 1
     acao = 'undefined' #define a variável acao como indefinido
     atordoamento = '0'

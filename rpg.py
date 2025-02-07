@@ -39,10 +39,10 @@ if lowercase_classe == 'guerreiro':
         habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 rodadas), digite 2 para golpe desleal (30 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
 elif lowercase_classe == 'mago':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (20 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 30% menos de dano por 3 rodadas): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (20 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 40% menos de dano por 3 rodadas): ")
 elif lowercase_classe == 'ladino':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 turnos você terá 1/4 de chance de desviar do ataque) ou digite 3 para ataque surpresa (50 de dano real): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 rodadas você terá 1/3 de chance de desviar do ataque) ou digite 3 para ataque surpresa (50 de dano real): ")
 
 sleep(delay)#delay    
 
@@ -187,11 +187,15 @@ usoHabilidade = 'undefined' #define a variável usoHabilidade como indefinido
 chanceDeCritar = 0 #define a variável chanceDeCritar como indefinido
 contadorHabilidade = 5 #define a variável contadorHabilidade como 5
 contadorFuria = 5 #define a variável contadorFuria como 5
+contadorVeu = 5 #define a variável contadorVeu como 5
+contadorAstucia = 5 #define a variável contadorAstucia como 5
+desvioAstucia = 0 #define a variável desvioAstucia como 0
 
 print("Começo da batalha!")
 
 while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
+    desvio = '0'#define o desvio como 0
 
     if contadorHabilidade >= 5:
 
@@ -219,7 +223,11 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             vidaInimigo = vidaInimigo - 20
             atordoamento = '1'
             print(f'Você usou sua habilidade {habilidadeClasse}!')
-        elif lowercase_classe == 'mago' and habilidadeClasse == 'véu mágico' and usoHabilidade == "1": #véu mágico
+        elif lowercase_classe == 'mago' and habilidadeClasse == 'véu mágico' and usoHabilidade == "1": #véu mágico funcional
+            contadorVeu = 0
+            if contadorVeu <= 4: #contador do véu mágico
+                defesaFisica = defesaFisica * 1.40
+                defesaMagica = defesaMagica * 1.40
             print(f'Você usou sua habilidade {habilidadeClasse}!')
 
 
@@ -228,7 +236,8 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             vidaInimigo = vidaInimigo - 20
             vidaMax = vidaMax + 20
             print(f'Você usou sua habilidade {habilidadeClasse}!')
-        elif lowercase_classe == 'ladino' and habilidadeClasse == 'astúcia' and usoHabilidade == "1": #astúcia
+        elif lowercase_classe == 'ladino' and habilidadeClasse == 'astúcia' and usoHabilidade == "1": #astúcia funcional
+            contadorAstucia = 0
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif lowercase_classe == 'ladino' and habilidadeClasse == 'ataque surpresa': #ataque surpresa funcional
             vidaInimigo = vidaInimigo - 50
@@ -244,6 +253,23 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             print(f'Faltam {3 - contadorFuria} rodadas para acabar a habilidade fúria')
         else:
             print('Você não está mais enfurecido!')
+
+    if contadorVeu < 4:
+        contadorVeu = contadorVeu + 1
+        if contadorVeu < 4:
+            print(f'Faltam {3 - contadorVeu} rodadas para acabar a habilidade véu mágico')
+        else:
+            print('Você não está mais com o véu mágico ativo!')
+            defesaFisica = defesaFisica / 1.4
+            defesaMagica = defesaMagica / 1.4
+
+    if contadorAstucia < 4:
+        contadorAstucia = contadorAstucia + 1
+        if contadorAstucia < 4:
+            print(f'Faltam {3 - contadorAstucia} rodadas para acabar a habilidade Astúcia')
+            desvioAstucia = random.randint(1,3)
+        else:
+            print('Você não está mais com a habilidade Astúcia ativa!!')
 
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
@@ -266,8 +292,15 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     while acao != '1' and acao != '2' and acao != '3': 
         acao = input("Escolha sua ação: 1 para bloqueio 2 para ataque rápido 3 para ataque carregado): ")
 
+    if contadorAstucia < 4:
+        if desvioAstucia == 1:
+            desvio = '1'
+            print("VOCÊ DESVIOU DO ATAQUE!!!!!!!")
+        else:
+            print("DESVIO FALHOU")
+
     if acao == '1':
-        chanceBloqueio = random.randint(1,2)
+        chanceBloqueio = random.randint(1,3)
         #BLOQUEIO
         if chanceBloqueio == 1:
             bloqueio = '1'
@@ -300,7 +333,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
 
     print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #falar ao usuário vida atual do inimigo
 
-    if atordoamento == '0' and bloqueio != '1':
+    if atordoamento == '0' and bloqueio != '1' and desvio !='1':
         vidaMax = (vidaMax - (danoFisicoInimigo * defesaFisica)) - danoMagicoInimigo * defesaMagica
         print(f'Sua vida atualmente é {vidaMax:,.1f}') #falar ao usuário sua vida atual
 
@@ -313,6 +346,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     atordoamento = '0'
     contadorHabilidade = contadorHabilidade + 1 #aumento o contador da habilidade em 1
     usoHabilidade = '3' #define usoHabilidade como 3
+    desvioAstucia = 0 #define desvioAstucia como 0
     print(f'contador habilidade em {contadorHabilidade}')
 
 if vidaMax > vidaInimigo:

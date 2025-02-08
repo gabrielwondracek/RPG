@@ -144,38 +144,38 @@ inimigo = random.randint(1,4) #faz a variável inimigo ter um valor entre 1 a 4
 if inimigo == 1:
     inimigo = 'Goliath'
     vidaInimigo = random.randint(400,800)
-    danoFisicoInimigo = random.randint(6,10)
+    danoFisicoInimigo = random.randint(10,15)
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.9
     defesaMagicaInimigo = 0.9
-    habilidadeInimigo = 'Dureza' #sofre 55% menos dano por 3 turnos
+    habilidadeInimigo = 'Dureza' #sofre 55% menos dano quando abaixo de 150 de vida
 #Caçador de mago
 if inimigo == 2:
     inimigo = 'Caçador de mago'
     vidaInimigo = random.randint(90,120)
-    danoFisicoInimigo = random.randint(10,35)
+    danoFisicoInimigo = random.randint(40,60)
     danoMagicoInimigo = 0
-    defesaFisicaInimigo = 1.2
-    defesaMagicaInimigo = 0.1
-    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade
+    defesaFisicaInimigo = 1.1
+    defesaMagicaInimigo = 0.4
+    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade até o fim do combate, usa no início do 1 turno do combate, causa 30 de dano mágico 
 #Mago antigo
 if inimigo == 3:
     inimigo = 'mago antigo'
-    vidaInimigo = random.randint(75,100)
+    vidaInimigo = random.randint(45,75)
     danoFisicoInimigo = 0
-    danoMagicoInimigo = random.randint(25,30)
-    defesaFisicaInimigo = 0.2
-    defesaMagicaInimigo = 1.2
-    habilidadeInimigo = 'Bola elétrica' #causa 50 de dano real
+    danoMagicoInimigo = random.randint(45,85)
+    defesaFisicaInimigo = 0.5
+    defesaMagicaInimigo = 1.1
+    habilidadeInimigo = 'Marca da morte' #causa 15 de dano real no jogador no fim turno até o fim do combate, usa no início do mesmo
 #Guerreiro de pedra
 if inimigo == 4:
     inimigo = 'guerreiro de pedra'
-    vidaInimigo = random.randint(215,600)
-    danoFisicoInimigo = random.randint(7,15)
+    vidaInimigo = random.randint(250,600)
+    danoFisicoInimigo = random.randint(15,25)
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.8
     defesaMagicaInimigo = 0.8
-    habilidadeInimigo = 'Petrificar' #pula um turno do usuário
+    habilidadeInimigo = 'Petrificar' #petrifica o jogador, que pulará o próximo turno do mesmo, tem 1/2 de chance de ser usado por turno, após ser utilizado, voltara a a funcionar em 5 turnos
 print(f'Seu inimigo é {inimigo}, com vida de {vidaInimigo}, dano físico de {danoFisicoInimigo}, dano mágico de {danoMagicoInimigo}, e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
 
 sleep(delay3)#delay
@@ -198,10 +198,10 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     desvio = '0'#define o desvio como 0
 
     if contadorHabilidade >= 5:
-
-        #GUERREIRO
         while usoHabilidade != '1' and usoHabilidade != '2':
             usoHabilidade = input(f'Quer usar sua habilidade {habilidadeClasse} 1 para sim 2 para não: ')
+
+        #GUERREIRO
         if lowercase_classe == 'guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria funcional
             contadorFuria = 0
             if contadorFuria <= 4: #contador da fúria
@@ -247,6 +247,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         if usoHabilidade == '1':
             contadorHabilidade = 0 #define o contadorHabilidade como 0
 
+    #CONTADOR DA FÚRIA
     if contadorFuria < 4:
         contadorFuria = contadorFuria + 1
         if contadorFuria < 4:
@@ -254,6 +255,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         else:
             print('Você não está mais enfurecido!')
 
+    #CONTADOR DO VÉU MÁGICO
     if contadorVeu < 4:
         contadorVeu = contadorVeu + 1
         if contadorVeu < 4:
@@ -263,6 +265,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             defesaFisica = defesaFisica / 1.4
             defesaMagica = defesaMagica / 1.4
 
+    #CONTADOR DA ASTÚCIA
     if contadorAstucia < 4:
         contadorAstucia = contadorAstucia + 1
         if contadorAstucia < 4:
@@ -271,6 +274,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         else:
             print('Você não está mais com a habilidade Astúcia ativa!!')
 
+    #CHANCE DE ATORDOAR EQUIPAMENTO BASTÃO LADINO
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
         if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar 
@@ -279,29 +283,31 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         else:
             atordoamento = '0'
 
+    #CHANCE DE CRITAR EQUIPAMENTO RAPIEIRA LADINO
     if equipamento == 'rapieira':
         chanceDeCritar = random.randint(1,4)
         if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
-            danoFisico = 60
+            danoFisico = 90
             danoMagico = 0 
             print("CRÍTICO!!!!!!!!")
         else:
             danoFisico = 30
             danoMagico = 0 
 
+    #ESCOLHA DAS AÇÕES + VERIFICA SE O JOGADOR NÃO ESTÁ PETRIFICADO
     while acao != '1' and acao != '2' and acao != '3': 
         acao = input("Escolha sua ação: 1 para bloqueio 2 para ataque rápido 3 para ataque carregado): ")
 
+    #DESVIO (HABILIDADE ASTUCIA DO LADINO)
     if contadorAstucia < 4:
         if desvioAstucia == 1:
             desvio = '1'
             print("VOCÊ DESVIOU DO ATAQUE!!!!!!!")
         else:
             print("DESVIO FALHOU")
-
+    #BLOQUEIO
     if acao == '1':
         chanceBloqueio = random.randint(1,3)
-        #BLOQUEIO
         if chanceBloqueio == 1:
             bloqueio = '1'
             print("VOCÊ BLOQUEOU O ATAQUE!!!!!!!")
@@ -344,11 +350,11 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     turno = turno + 1
     acao = 'undefined' #define a variável acao como indefinido
     atordoamento = '0'
-    contadorHabilidade = contadorHabilidade + 1 #aumento o contador da habilidade em 1
     usoHabilidade = '3' #define usoHabilidade como 3
     desvioAstucia = 0 #define desvioAstucia como 0
-    print(f'contador habilidade em {contadorHabilidade}')
-
+    if contadorHabilidade < 5:
+        contadorHabilidade = contadorHabilidade + 1 #aumento o contador da habilidade em 1
+        print(f'Faltam {5 - contadorHabilidade} turnos para usar sua habilidade')
 if vidaMax > vidaInimigo:
     print("Você ganhou!")
 else:

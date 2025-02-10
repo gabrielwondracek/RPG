@@ -138,7 +138,7 @@ print(f'Sua classe é {lowercase_classe}, sua vida é {vidaMax}, sua habilidade 
 sleep(delay2)#delay
 
 #ESCOLHA ALEATÓRIA DO INIMIGO--------------------------------------------------------------------------------------------------------------------------------------------
-inimigo = random.randint(1,4) #faz a variável inimigo ter um valor entre 1 a 4
+inimigo = random.randint(4,4) #faz a variável inimigo ter um valor entre 1 a 4
 
 #Goliath
 if inimigo == 1:
@@ -148,16 +148,16 @@ if inimigo == 1:
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.9
     defesaMagicaInimigo = 0.9
-    habilidadeInimigo = 'Dureza' #sofre 55% menos dano quando abaixo de 150 de vida
+    habilidadeInimigo = 'Enfurecido' #sofre 55% menos dano quando abaixo de 150 de vida
 #Caçador de mago
 if inimigo == 2:
-    inimigo = 'Caçador de mago'
+    inimigo = 'Caçador de magos'
     vidaInimigo = random.randint(90,120)
     danoFisicoInimigo = random.randint(40,60)
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 1.1
     defesaMagicaInimigo = 0.4
-    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade até o fim do combate, usa no início do 1 turno do combate, causa 30 de dano mágico 
+    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade até o fim do combate, usa no início do 1 turno do combate
 #Mago antigo
 if inimigo == 3:
     inimigo = 'mago antigo'
@@ -166,7 +166,7 @@ if inimigo == 3:
     danoMagicoInimigo = random.randint(45,85)
     defesaFisicaInimigo = 0.5
     defesaMagicaInimigo = 1.1
-    habilidadeInimigo = 'Marca da morte' #causa 15 de dano real no jogador no fim turno até o fim do combate, usa no início do mesmo
+    habilidadeInimigo = 'Marca da morte' #causa 15 de dano real no jogador no início do turno até o fim do combate, usa no início do 1 turno
 #Guerreiro de pedra
 if inimigo == 4:
     inimigo = 'guerreiro de pedra'
@@ -190,12 +190,48 @@ contadorFuria = 5 #define a variável contadorFuria como 5
 contadorVeu = 5 #define a variável contadorVeu como 5
 contadorAstucia = 5 #define a variável contadorAstucia como 5
 desvioAstucia = 0 #define a variável desvioAstucia como 0
+contadorEnfurecido = 0 #define como 0 o contador contadorEnfurecido(habilidade do inimigo Goliath)
+contadorCacarmagia = 0 #define como 0 o contador contadorCacarmagia(habilidade do inimigo caçador de mago)
+contadorMarcadamorte = 0 #define como 0 o contador contadorMarcadamorte(habilidade do inimigo mago antigo)
+contadorPetrificar = 5 #define como 5 o contador contadorPetrificar(habilidade do inimigo guerreiro de pedra)
+petrificar = 0 #define a variável petrificar como 0
 
 print("Começo da batalha!")
 
 while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
     desvio = '0'#define o desvio como 0
+
+    #habilidade Goliath
+    if inimigo == 'Goliath' and vidaInimigo <= 150:
+        defesaFisicaInimigo = 0.35
+        defesaMagicaInimigo = 0.35
+        if contadorEnfurecido == 0:
+            print("Goliath ficou enfurecido!!!")
+            contadorEnfurecido = 1
+
+    #habilidade caçador de mago
+    if inimigo == 'Caçador de magos' and contadorCacarmagia == 0:
+        contadorHabilidade = 0
+        print("Caçador de magos usou caçar magia!!!")
+        contadorCacarmagia = 1
+
+    #habilidade mago antigo
+    if inimigo == 'mago antigo':
+        vidaMax = vidaMax - 15
+        if contadorMarcadamorte == 0:
+            print("Mago antigo usou Marca da morte e lhe causou 15 de dano!!!")
+            contadorMarcadamorte = 1
+        else:
+            print("Marca da morte te causou 15 de dano!!!")
+
+    #habilidade guerreiro de pedra
+    if inimigo == 'guerreiro de pedra' and contadorPetrificar >= 5: 
+        petrificar = random.randint(1,2)
+        if petrificar == 2:
+            print ("Você foi petrificado!!!")
+            contadorPetrificar = 0
+
 
     if contadorHabilidade >= 5:
         while usoHabilidade != '1' and usoHabilidade != '2':
@@ -295,7 +331,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             danoMagico = 0 
 
     #ESCOLHA DAS AÇÕES + VERIFICA SE O JOGADOR NÃO ESTÁ PETRIFICADO
-    while acao != '1' and acao != '2' and acao != '3': 
+    while acao != '1' and acao != '2' and acao != '3' and petrificar != 2: 
         acao = input("Escolha sua ação: 1 para bloqueio 2 para ataque rápido 3 para ataque carregado): ")
 
     #DESVIO (HABILIDADE ASTUCIA DO LADINO)
@@ -327,7 +363,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         if chanceAcertoCarregado == 1:
             if contadorFuria < 4:#verifica se a fúria está ativa
                 vidaInimigo = (vidaInimigo - (danoExtraFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
-                print("ATAQUE RÁPIDO ENFURECIDO!!!!")
+                print("ATAQUE CARREGADO ENFURECIDO!!!!")
             else:
                 vidaInimigo = (vidaInimigo - ((danoFisico * 2) * defesaFisicaInimigo)) - (danoMagico * 2) * defesaMagicaInimigo
                 print("ATAQUE CARREGADO ACERTOU!!!!")
@@ -352,9 +388,15 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     atordoamento = '0'
     usoHabilidade = '3' #define usoHabilidade como 3
     desvioAstucia = 0 #define desvioAstucia como 0
-    if contadorHabilidade < 5:
+    petrificar = 1
+
+    if contadorHabilidade < 5 and inimigo != 'Caçador de magos':
         contadorHabilidade = contadorHabilidade + 1 #aumento o contador da habilidade em 1
         print(f'Faltam {5 - contadorHabilidade} turnos para usar sua habilidade')
+
+    if contadorPetrificar < 5:
+        contadorPetrificar = contadorPetrificar + 1
+    
 if vidaMax > vidaInimigo:
     print("Você ganhou!")
 else:

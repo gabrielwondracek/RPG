@@ -138,7 +138,7 @@ print(f'Sua classe é {lowercase_classe}, sua vida é {vidaMax}, sua habilidade 
 sleep(delay2)#delay
 
 #ESCOLHA ALEATÓRIA DO INIMIGO--------------------------------------------------------------------------------------------------------------------------------------------
-inimigo = random.randint(4,4) #faz a variável inimigo ter um valor entre 1 a 4
+inimigo = random.randint(1,4) #faz a variável inimigo ter um valor entre 1 a 4
 
 #Goliath
 if inimigo == 1:

@@ -3,6 +3,7 @@ from time import sleep #import para delay
 delay = 1 #definição do tempo de delay para 1 segundos
 delay2 = 2 #definição do tempo de delay para 2 segundos
 delay3 = 3 #definição do tempo de delay para 3 segundos
+delay8 = 8 #definição do tempo de delay para 8 segundos
 
 #ESCOLHA DA CLASSE-------------------------------------------------------------------------------------------------------------------------------------------------------------
 classe = 'undefined'#faz com que inicialmente seja indefinido a variável classe
@@ -36,13 +37,13 @@ sleep(delay)#delay
 habilidadeClasse = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if lowercase_classe == 'guerreiro':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 rodadas), digite 2 para golpe desleal (30 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 turnos), digite 2 para golpe desleal (30 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
 elif lowercase_classe == 'mago':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (20 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 40% menos de dano por 3 rodadas): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (20 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 40% menos de dano por 3 turnos): ")
 elif lowercase_classe == 'ladino':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 rodadas você terá 1/3 de chance de desviar do ataque) ou digite 3 para ataque surpresa (50 de dano real): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 turnos você terá 1/3 de chance de desviar do ataque) ou digite 3 para ataque surpresa (50 de dano real): ")
 
 sleep(delay)#delay    
 
@@ -148,7 +149,9 @@ if inimigo == 1:
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.9
     defesaMagicaInimigo = 0.9
-    habilidadeInimigo = 'Enfurecido' #sofre 55% menos dano quando abaixo de 150 de vida
+    habilidadeInimigo = 'Enfurecido' #nome da habilidade do inimigo
+    descricaoHabilidadeInimigo = 'o inimigo sofre 55% menos dano quando abaixo de 150 de vida' #descrição da habilidade do inimigo
+
 #Caçador de mago
 if inimigo == 2:
     inimigo = 'Caçador de magos'
@@ -157,7 +160,9 @@ if inimigo == 2:
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 1.1
     defesaMagicaInimigo = 0.4
-    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade até o fim do combate, usa no início do 1 turno do combate
+    habilidadeInimigo = 'Caçar magia'
+    descricaoHabilidadeInimigo = 'faz o jogador não poder mais utlizar habilidade até o fim do combate, usa no início do 1 turno do combate'
+
 #Mago antigo
 if inimigo == 3:
     inimigo = 'mago antigo'
@@ -166,7 +171,9 @@ if inimigo == 3:
     danoMagicoInimigo = random.randint(45,85)
     defesaFisicaInimigo = 0.5
     defesaMagicaInimigo = 1.1
-    habilidadeInimigo = 'Marca da morte' #causa 15 de dano real no jogador no início do turno até o fim do combate, usa no início do 1 turno
+    habilidadeInimigo = 'Marca da morte' 
+    descricaoHabilidadeInimigo = 'causa 15 de dano real no jogador no início do turno até o fim do combate, usa no início do 1 turno'
+
 #Guerreiro de pedra
 if inimigo == 4:
     inimigo = 'guerreiro de pedra'
@@ -175,10 +182,12 @@ if inimigo == 4:
     danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.8
     defesaMagicaInimigo = 0.8
-    habilidadeInimigo = 'Petrificar' #petrifica o jogador, que pulará o próximo turno do mesmo, tem 1/2 de chance de ser usado por turno, após ser utilizado, voltara a a funcionar em 5 turnos
-print(f'Seu inimigo é {inimigo}, com vida de {vidaInimigo}, dano físico de {danoFisicoInimigo}, dano mágico de {danoMagicoInimigo}, e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
+    habilidadeInimigo = 'Petrificar' 
+    descricaoHabilidadeInimigo = 'petrifica o jogador, que pulará o próximo turno do mesmo, tem 1/2 de chance de ser usado por turno, após ser utilizado, voltara a funcionar em 5 turnos'
 
-sleep(delay3)#delay
+print(f'Seu inimigo é {inimigo}, com vida de {vidaInimigo}, dano físico de {danoFisicoInimigo}, dano mágico de {danoMagicoInimigo}, e sua habilidade é {habilidadeInimigo} que {descricaoHabilidadeInimigo}') #fala o inimigo, seus atributos e descreve a habilidade do inimigo
+
+sleep(delay8)#delay
 
 #BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
 turno = 1 #define o turno inicial como 1
@@ -287,7 +296,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     if contadorFuria < 4:
         contadorFuria = contadorFuria + 1
         if contadorFuria < 4:
-            print(f'Faltam {3 - contadorFuria} rodadas para acabar a habilidade fúria')
+            print(f'Faltam {3 - contadorFuria} turnos para acabar a habilidade fúria')
         else:
             print('Você não está mais enfurecido!')
 
@@ -295,7 +304,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     if contadorVeu < 4:
         contadorVeu = contadorVeu + 1
         if contadorVeu < 4:
-            print(f'Faltam {3 - contadorVeu} rodadas para acabar a habilidade véu mágico')
+            print(f'Faltam {3 - contadorVeu} turnos para acabar a habilidade véu mágico')
         else:
             print('Você não está mais com o véu mágico ativo!')
             defesaFisica = defesaFisica / 1.4
@@ -305,7 +314,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     if contadorAstucia < 4:
         contadorAstucia = contadorAstucia + 1
         if contadorAstucia < 4:
-            print(f'Faltam {3 - contadorAstucia} rodadas para acabar a habilidade Astúcia')
+            print(f'Faltam {3 - contadorAstucia} turnos para acabar a habilidade Astúcia')
             desvioAstucia = random.randint(1,3)
         else:
             print('Você não está mais com a habilidade Astúcia ativa!!')
@@ -373,11 +382,19 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     if chanceDeCritar == 1: #if para falar ao usuário de rapieira se critou ou não
             print("CRÍTICO!!!!!!!!")
 
-    print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #falar ao usuário vida atual do inimigo
+    if vidaInimigo > 0:
+        print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #fala ao usuário vida atual do inimigo
+    else:
+        print(f'Vida atualmente do inimigo é 0')
 
+    #verifica as condições para que o jogador possa receber dano
     if atordoamento == '0' and bloqueio != '1' and desvio !='1':
         vidaMax = (vidaMax - (danoFisicoInimigo * defesaFisica)) - danoMagicoInimigo * defesaMagica
-        print(f'Sua vida atualmente é {vidaMax:,.1f}') #falar ao usuário sua vida atual
+    
+    if vidaMax > 0:
+        print(f'Sua vida atualmente é {vidaMax:,.1f}') #fala ao usuário sua vida atual
+    else:
+        print(f'Sua vida atual é 0')
 
     sleep(delay2)#delay
 

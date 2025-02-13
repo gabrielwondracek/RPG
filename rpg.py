@@ -213,7 +213,7 @@ while vidaInimigo >= 0 and vidaMax >= 0:
 
     #habilidade Goliath
     if inimigo == 'Goliath' and vidaInimigo <= 150:
-        defesaFisicaInimigo = 0.35
+        defesaFisicaInimigo = 0.35 
         defesaMagicaInimigo = 0.35
         if contadorEnfurecido == 0:
             print("Goliath ficou enfurecido!!!")
@@ -228,15 +228,15 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     #habilidade mago antigo
     if inimigo == 'mago antigo':
         vidaMax = vidaMax - 15
-        if contadorMarcadamorte == 0:
+        if contadorMarcadamorte == 0: #fala no 1 turno
             print("Mago antigo usou Marca da morte e lhe causou 15 de dano!!!")
             contadorMarcadamorte = 1
-        else:
+        else: #fala nos outros turnos
             print("Marca da morte te causou 15 de dano!!!")
 
     #habilidade guerreiro de pedra
     if inimigo == 'guerreiro de pedra' and contadorPetrificar >= 5: 
-        petrificar = random.randint(1,2)
+        petrificar = random.randint(1,2) #serve para ver se o jogador vai ser petrificado, no caso 2 é sim e 1 é não
         if petrificar == 2:
             print ("Você foi petrificado!!!")
             contadorPetrificar = 0

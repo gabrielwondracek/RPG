@@ -5,7 +5,7 @@ delay2 = 2 #definição do tempo de delay para 2 segundos
 delay3 = 3 #definição do tempo de delay para 3 segundos
 delay8 = 8 #definição do tempo de delay para 8 segundos
 
-#ESCOLHA DA CLASSE-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#ESCOLHA DA CLASSE---------------------------------------------------------------------------------------------------------
 classe = 'undefined'#faz com que inicialmente seja indefinido a variável classe
 confirmacaoClasse = 'undefined'#faz com que inicialmente seja indefinido a variável confirmacaoClasse
 lowercase_classe = 'undefined' #faz com que inicialmente seja indefinido a variável lowercase_classe

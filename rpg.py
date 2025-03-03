@@ -33,7 +33,7 @@ print(f'Sua classe é {lowercase_classe} e sua vida é {vidaMax}')
 
 sleep(delay)#delay
 
-#ESCOLHA DA HABILIDADE DA CLASSE------------------------------------------------------------------------------------------------------------------------------------------------
+#ESCOLHA DA HABILIDADE DA CLASSE------------------------------------------------------------------------------------------------------------------------------------------
 habilidadeClasse = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if lowercase_classe == 'guerreiro':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
@@ -81,12 +81,15 @@ elif lowercase_classe == 'ladino' and habilidadeClasse == '3':
 
 #ESCOLHA DO EQUIPAMENTO------------------------------------------------------------------------------------------------------------------------------------------------
 equipamento = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
+#EQUIPAMENTO GUERREIRO
 if lowercase_classe == 'guerreiro':
     while equipamento != '1' and equipamento != '2': 
         equipamento = input("Escolha seu equipamento, digite 1 para espada longa (40 de dano físico), digite 2 para espada e escudo (25 de dano físico e sofre 10% menos de dano): ")
+#EQUIPAMENTO MAGO
 elif lowercase_classe == 'mago':
     while equipamento != '1' and equipamento != '2': 
         equipamento = input("Escolha seu equipamento, digite 1 para cajado mágico (40 de dano mágico), digite 2 para adaga mágica (25 de dano mágico e 15 de dano físico): ")
+#EQUIPAMENTO LADINO
 elif lowercase_classe == 'ladino':
     while equipamento != '1' and equipamento != '2': 
         equipamento = input("Escolha seu equipamento, digite 1 rapieira (30 de dano físico e 1/4 de chance de duplicar o dano), digite 2 para bastão (20 de dano físico e 1/4 de chance de atordoar o inimigo por 1 turno): ")
@@ -129,7 +132,7 @@ elif lowercase_classe == 'ladino' and equipamento == '2':
     danoFisico = 25
     danoMagico = 0 
     atordoamento = '0'
-print(f'Seu equipamento é {equipamento}')
+print(f'Seu equipamento é {equipamento}')#fala o equipamento escolhido ao jogador
 
 sleep(delay2)#delay
 
